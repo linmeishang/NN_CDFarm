@@ -10,24 +10,6 @@ from torch.autograd import Variable
 import torch.optim as optim
 import matplotlib.pyplot as plt
 
-#%%
-df = pd.read_excel(r'N:\agpo\work1\Shang\ForPyomoBook\nn_CDFarm_torch_multiobj_test.xlsx', header = 0)
-df_array = df.to_numpy()
-
-from mpl_toolkits import mplot3d
-fig = plt.figure()
-ax = plt.axes(projection="3d")
-#%%
-fig = plt.figure()
-ax = plt.axes(projection="3d")
-
-# Data for a three-dimensional line
-zdata = df_array[:, 6]
-xdata = df_array[:, 0]
-ydata = df_array[:, 2]
-ax.scatter3D(xdata, ydata, zdata, c=zdata, cmap='Greens')
-plt.show()
-
 
 #%%
 # create a class for custom dataloader
@@ -57,7 +39,7 @@ class DatasetCDFarm(Dataset):
         return self.len
 
 # Load train and test data
-train_dataset = DatasetCDFarm(r'N:\agpo\work1\Shang\ForPyomoBook\nn_CDFarm_torch_multiobj_train.xlsx')
+train_dataset = DatasetCDFarm('nn_CDFarm_torch_multiobj_train.xlsx')
 train_loader = DataLoader(dataset=train_dataset, 
                         batch_size = 4, 
                         shuffle = True) # shuffle: mix the data randomly
@@ -130,7 +112,7 @@ plt.plot(loss_values)
 
 
 
-test_dataset = DatasetCDFarm(r'N:\agpo\work1\Shang\ForPyomoBook\nn_CDFarm_torch_multiobj_test.xlsx')
+test_dataset = DatasetCDFarm('nn_CDFarm_torch_multiobj_test.xlsx')
 test_loader = DataLoader(dataset=test_dataset) 
 #%%
 def test():
