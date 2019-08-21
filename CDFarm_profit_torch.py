@@ -38,7 +38,7 @@ class DatasetCDFarm(Dataset):
         return self.len
 
 # Load train and test data
-train_dataset = DatasetCDFarm(r'N:\agpo\work1\Shang\ForPyomoBook\nn_CDFarm_torch_profit_train.xlsx')
+train_dataset = DatasetCDFarm('nn_CDFarm_torch_profit_train.xlsx')
 train_loader = DataLoader(dataset=train_dataset, 
                         batch_size = 4, 
                         shuffle = True) # shuffle: mix the data randomly
@@ -56,6 +56,7 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(hidden1_size, hidden2_size) # output layer
         self.relu2 = nn.ReLU()
         self.fc3 = nn.Linear(hidden2_size, output_size)
+        
     #define how data flows in this network, needs to be defined for each network
     def forward(self, x):
         # pass data through the net
@@ -73,7 +74,7 @@ print(MyNet)
 # Construct our loss function and an Optimizer. The call to model.parameters()
 criterion = nn.MSELoss()
 optimizer = optim.Adam(MyNet.parameters(), lr=0.01)
-epochs = 100
+epochs = 10
 loss_values = []    
 
 for epoch in range(epochs):
@@ -111,7 +112,7 @@ plt.plot(loss_values)
 
 
 
-test_dataset = DatasetCDFarm(r'N:\agpo\work1\Shang\ForPyomoBook\nn_CDFarm_torch_profit_test.xlsx')
+test_dataset = DatasetCDFarm('nn_CDFarm_torch_profit_test.xlsx')
 test_loader = DataLoader(dataset=test_dataset) 
 
 def test():
@@ -128,7 +129,6 @@ def test():
 
 test()
 
-print('Square rooted loss:', torch.sqrt(loss))
 
 
 #%%
