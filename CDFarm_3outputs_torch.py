@@ -10,6 +10,31 @@ from torch.autograd import Variable
 import torch.optim as optim
 import matplotlib.pyplot as plt
 
+#%%
+### see how inputs and outputs are related
+df = pd.read_excel('nn_CDFarm_torch_multiobj_train.xlsx', header = 0)
+df_array = df.to_numpy()
+
+for i in range(3, 7):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    x = df_array[:, 0]
+    y = df_array[:, 1]
+    z = df_array[:, 2]
+
+    c = df_array[:, i] 
+
+    img = ax.scatter(x, y, z, c=c, cmap=plt.hot())
+
+    plt.title(str('y'+ str(i)))
+
+    plt.xlabel('x1')
+    plt.ylabel('x2')
+    plt.ylabel('x3')
+
+    fig.colorbar(img)
+    plt.show()
+
 
 #%%
 # create a class for custom dataloader
